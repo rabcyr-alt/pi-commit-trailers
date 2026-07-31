@@ -1,10 +1,10 @@
 /**
- * Pure shell-command parsing logic for the pi-session-trailer extension.
+ * Pure shell-command parsing logic for the pi-commit-trailers extension.
  *
  * Goal: find every `git commit -m ...` invocation inside an arbitrary bash
  * command string (which may chain multiple commands with &&, ||, ;, |, &,
  * newlines, subshells, redirects, comments, etc.) and return the character
- * span of each one's argument list, so a trailer flag can be spliced into the
+ * span of each one's argument list, so a trailer block can be spliced into the
  * right place — not blindly appended at the end of the whole string.
  *
  * This module has no pi imports so it can be unit-tested in isolation.
@@ -213,23 +213,33 @@ function escapeDollarSingle(value: string): string {
 }
 
 /**
- * Return the rewritten command with a `Pi-Session: <sessionId>` trailer spliced
- * into every `git commit` invocation. The trailer is inserted at the end of
- * each commit's own argument list (before any trailing operator), so chaining
- * like `git commit -m msg && echo done` keeps the trailer on the commit rather
- * than gluing it onto `echo`. Multiple commits in one command all get a trailer.
+ * Return the rewritten command with the given trailer lines spliced into every
+ * `git commit` invocation. All trailer lines are placed in a single new
+ * `-m "" -m $'...'` block (one paragraph, so git-interpret-trailers parses them
+ * all). The block is inserted at the end of each commit's own argument list
+ * (before any trailing operator), so chaining like `git commit -m msg && echo
+ * done` keeps the trailers on the commit rather than gluing them onto `echo`.
+ * Multiple commits in one command all get the trailer block.
+ *
+ * Pass already-formatted trailer lines, e.g.:
+ *   ["Co-Authored-By: Claude <noreply@pi.dev>", "Generated-By: pi 0.83.0"]
  */
-export function insertSessionTrailers(cmd: string, sessionId: string): string {
+export function insertTrailers(cmd: string, trailers: string[]): string {
+	if (trailers.length === 0) return cmd;
 	const spans = findGitCommitSpans(cmd);
 	if (spans.length === 0) return cmd;
-	// Leading + trailing space: leading separates from the preceding word
-	// (needed when the commit is the whole command); trailing separates the
-	// $'...' literal from a following operator such as `2>&1` or a `#` comment.
-	const trailer = ` -m "" -m $'Pi-Session: ${escapeDollarSingle(sessionId)}' `;
+
+	// Real newlines inside $'...' are preserved by bash; escapeDollarSingle
+	// leaves them intact (it only escapes backslash and single quote).
+	const body = escapeDollarSingle(trailers.join("\n"));
+	// Leading space separates from the preceding word; trailing space separates
+	// the $'...' literal from a following operator such as `2>&1` or a comment.
+	const block = ` -m "" -m $'${body}' `;
+
 	let out = cmd;
 	for (let k = spans.length - 1; k >= 0; k--) {
 		const end = spans[k][1];
-		out = out.slice(0, end) + trailer + out.slice(end);
+		out = out.slice(0, end) + block + out.slice(end);
 	}
 	return out;
 }
