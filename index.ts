@@ -17,6 +17,13 @@
  * session-id trailer, using robust span-based splicing for all of them.
  *
  * Trailers are formatted per git-interpret-trailers conventions.
+ *
+ * Attribution: The tool_call hook structure, model-name resolution, and the
+ * Co-Authored-By / Generated-By trailer content are derived from
+ * pi-co-authored-by (https://github.com/bruno-garcia/pi-co-authored-by)
+ * by Bruno Garcia, MIT licensed. The shell-parsing logic in
+ * lib/commit-span.ts is original to this project. See LICENSE and
+ * THIRD_PARTY_NOTICES.md.
  */
 
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";

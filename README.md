@@ -70,6 +70,17 @@ single/double/`$'` quotes, `$(...)` and backtick command substitution, line
 continuations, comments, fd-prefixed redirects, transparent command runners
 (`sudo`, `env`, `nohup`, ...), and env-var assignments preceding the command.
 
+## Credits
+
+The `tool_call` hook structure, model-name resolution, and the `Co-Authored-By`
+/ `Generated-By` trailer content in `index.ts` are derived from
+[`pi-co-authored-by`](https://github.com/bruno-garcia/pi-co-authored-by) by
+Bruno Garcia (MIT licensed). The shell command-parsing and trailer-splicing
+logic in `lib/commit-span.ts` is original to this project. See
+[`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md) for details.
+
 ## License
 
-MIT
+MIT — Copyright (c) 2026 Ashley Willis, with portions of `index.ts` derived
+from `pi-co-authored-by` (Copyright (c) 2026 Bruno Garcia). See
+[`LICENSE`](./LICENSE) for the full text.
