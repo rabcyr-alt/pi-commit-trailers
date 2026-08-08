@@ -29,8 +29,16 @@
     "LICENSE",
     "THIRD_PARTY_NOTICES.md"
   ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "vitest": "^4.0.0"
   },
   "pi": {
     "extensions": ["./index.ts"],
