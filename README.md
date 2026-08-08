@@ -4,6 +4,8 @@ A [Pi](https://github.com/badlogic/pi) extension that automatically appends git
 trailers to commit messages when the agent runs `git commit`. Records which
 model, which pi version, and which pi session produced the commit.
 
+![pi-commit-trailers preview](https://raw.githubusercontent.com/rabcyr-alt/pi-commit-trailers/master/docs/pi-commit-trailers.png)
+
 ## Trailers
 
 | Trailer | Value | Example |

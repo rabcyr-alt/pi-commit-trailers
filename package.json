@@ -33,6 +33,7 @@
     "@earendil-works/pi-coding-agent": "*"
   },
   "pi": {
-    "extensions": ["./index.ts"]
+    "extensions": ["./index.ts"],
+    "image": "https://raw.githubusercontent.com/rabcyr-alt/pi-commit-trailers/master/docs/pi-commit-trailers.png"
   }
 }
