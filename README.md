@@ -48,16 +48,26 @@ and multiple commits in one command.
 
 ## Install
 
-This is a local extension. Drop it in the global extensions directory:
+Install with `pi install` (writes to user settings by default):
 
-```
-~/.pi/agent/extensions/pi-commit-trailers/
-├── index.ts
-├── lib/commit-span.ts
-└── README.md
+```bash
+pi install npm:pi-commit-trailers
 ```
 
-Pi auto-discovers it on startup (or `/reload`). No `pi install` needed.
+Or install from git:
+
+```bash
+pi install git:github.com/rabcyr-alt/pi-commit-trailers
+```
+
+Try it without installing:
+
+```bash
+pi -e npm:pi-commit-trailers
+```
+
+After installing, pi loads the extension automatically on every session start.
+Reload a running session with `/reload` to pick it up without restarting.
 
 ## How it works
 
