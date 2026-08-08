@@ -1,6 +1,6 @@
 {
   "name": "pi-commit-trailers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Pi extension that appends Co-Authored-By, Generated-By, and Pi-Session git trailers to every git commit — robustly, even under command chaining.",
   "author": "Ashley Willis",
   "license": "MIT",
