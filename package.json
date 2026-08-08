@@ -1,0 +1,38 @@
+{
+  "name": "pi-commit-trailers",
+  "version": "0.1.0",
+  "description": "A Pi extension that appends Co-Authored-By, Generated-By, and Pi-Session git trailers to every git commit — robustly, even under command chaining.",
+  "author": "Ashley Willis",
+  "license": "MIT",
+  "homepage": "https://github.com/rabcyr-alt/pi-commit-trailers#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rabcyr-alt/pi-commit-trailers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rabcyr-alt/pi-commit-trailers/issues"
+  },
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "pi",
+    "git",
+    "commit",
+    "co-authored-by",
+    "pi-session",
+    "trailers"
+  ],
+  "files": [
+    "index.ts",
+    "lib/commit-span.ts",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "pi": {
+    "extensions": ["./index.ts"]
+  }
+}
